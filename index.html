@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>
+		Força de Senha
+	</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+	<div class="jumbotron text-center">
+
+		<h1 class="h1">Força de Senha</h1>
+
+		<label for="senha">Senha</label>
+		<input type="password" name="senha" id="senha" placeholder="Digite sua senha aqui" class="form-control col-md-6 offset-md-3 mb-4">	
+
+		<div >Força da senha: <span id="forca"></span></div>		
+
+	</div>
+
+	<script>
+		$('#senha').bind('keyup', function() {
+			
+			var txt = $(this).val();
+
+			var forca = 0;
+			// letras
+			// números
+			// caracteres especiais
+			// nínimo de caracteres
+
+			if (txt.length > 10) {
+				forca += 25;
+			}
+			else if (txt.length > 9) {
+				forca += 20;
+			}
+			else if (txt.length > 8) {
+				forca += 15;
+			}
+			else if (txt.length > 7) {
+				forca += 10;
+			}
+			else if (txt.length > 6) {
+				forca += 5;
+			}
+			else if (txt.length > 5) {
+				forca += 3;
+			}
+
+			// letras
+			var reg = new RegExp(/[a-z]/i);
+
+			if (reg.test(txt)) {
+				forca += 25;
+			}
+
+			// múmeros
+			var reg = new RegExp(/[0-9]/i);
+
+			if (reg.test(txt)) {
+				forca += 25;
+			}
+
+			// especiais
+			var reg = new RegExp(/[^a-z0-9]/i);
+
+			if (reg.test(txt)) {
+				forca += 25;
+			}
+
+			if (forca < 50) {
+				$('#forca').html('Senha muito fraca');			
+			}
+			else if (forca < 75) {
+				$('#forca').html('Senha fraca');			
+			}
+			else if (forca < 100) {
+				$('#forca').html('Senha razoável');			
+			}
+			else {
+				$('#forca').html('Senha forte');			
+			}
+			
+		});
+	</script>
+</body>
+</html>
